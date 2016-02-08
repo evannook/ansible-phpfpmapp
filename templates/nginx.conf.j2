@@ -1,0 +1,27 @@
+server {
+    listen 80;
+    listen [::]:80;
+
+    server_name {{ phpfpmapp_domain_name }};
+
+    root {{ phpfpmapp_basedir }};
+
+    index index.php index.html index.htm;
+
+    location / {
+        try_files $uri $uri/ =404;
+    }
+
+    location ~ \.php$ {
+        include snippets/fastcgi-php.conf;
+        fastcgi_pass unix:/var/run/php5-fpm.sock;
+    }
+
+    # deny access to scm repo dir
+    location ~ /\.hg {
+        deny all;
+    }
+    location ~ /\.git {
+        deny all;
+    }
+}

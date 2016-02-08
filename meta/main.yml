@@ -1,0 +1,15 @@
+galaxy_info:
+  author: Evan Nook
+  description: Setup php-fpm app
+  company: InnoNook
+  license: MIT
+  min_ansible_version: 2.0
+  platforms:
+  - name: Debian
+    versions:
+    - jessie
+  galaxy_tags:
+    - php
+    - debian
+dependencies:
+  - evannook.php

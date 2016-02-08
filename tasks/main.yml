@@ -1,0 +1,31 @@
+---
+- block:
+  - name: get root of base dir
+    shell: "dirname {{ phpfpmapp_basedir }}"
+    register: root_dir
+  - name: create root of base dir
+    file: "path={{ root_dir.stdout }} state=directory mode=0755"
+  
+  - name: check if the project directory exists
+    stat: "path={{ phpfpmapp_basedir }}"
+    register: p
+  - name: delete dest dir if exists
+    command: "rm -rf {{ phpfpmapp_basedir }}"
+    when: "p.stat.isdir is defined and p.stat.isdir"
+  
+  - name: add github and bitbucket to ssh known hosts
+    script: "add_ssh_known_hosts.sh"
+  - name: checkout source code via scm
+    command: "{{ phpfpmapp_scm }} clone {{ phpfpmapp_repo }} {{ phpfpmapp_basedir }}"
+  
+  - name: install nginx configuration of the project
+    template:
+      src: "nginx.conf.j2"
+      dest: "/etc/nginx/sites-available/{{ phpfpmapp_domain_name }}.conf"
+  
+  - name: activate nginx configuration of the project
+    file:
+      src: "/etc/nginx/sites-available/{{ phpfpmapp_domain_name }}.conf"
+      dest: "/etc/nginx/sites-enabled/{{ phpfpmapp_domain_name }}.conf"
+      state: "link"
+  tags: phpfpmapp
