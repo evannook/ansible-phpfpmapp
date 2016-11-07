@@ -28,4 +28,5 @@
       src: "/etc/nginx/sites-available/{{ phpfpmapp_domain_name }}.conf"
       dest: "/etc/nginx/sites-enabled/{{ phpfpmapp_domain_name }}.conf"
       state: "link"
-  tags: phpfpmapp
+  tags:
+    - phpfpmapp
