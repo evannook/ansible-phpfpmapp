@@ -17,7 +17,7 @@ phpfpmapp_repo: REPO_PATH
 Dependencies
 ------------
 
-- evannook.php
+- pylabs.php
 
 Example Playbook
 ----------------
@@ -25,13 +25,13 @@ Example Playbook
 ```yaml
 - hosts: servers
   roles:
-    - role: evannook.phpfpmapp
+    - role: pylabs.phpfpmapp
   vars:
     phpfpmapp_project_name: myproject
     phpfpmapp_domain_name: www.example.com
     phpfpmapp_basedir: /srv/www/myproject
     phpfpmapp_scm: git
-    phpfpmapp_repo: https://github.com/evannook/test_project
+    phpfpmapp_repo: https://github.com/pylabs/test_project
 ```
 
 License
@@ -42,4 +42,4 @@ MIT
 Author Information
 ------------------
 
-Evan Nook
+William Wu

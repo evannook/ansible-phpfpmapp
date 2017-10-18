@@ -1,15 +1,15 @@
 galaxy_info:
-  author: Evan Nook
+  author: William Wu
   description: Setup php-fpm app
-  company: InnoNook
+  company: PyLabs
   license: MIT
   min_ansible_version: 2.0
   platforms:
   - name: Debian
     versions:
-    - jessie
+    - stretch
   galaxy_tags:
     - php
     - debian
 dependencies:
-  - evannook.php
+  - pylabs.php
