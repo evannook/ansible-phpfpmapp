@@ -1,5 +1,10 @@
 ---
 - block:
+  - name: install scm packages
+    apt: "name={{ item }}  state=latest"
+    with_items:
+      - mercurial
+      - git
   - name: get root of base dir
     shell: "dirname {{ phpfpmapp_basedir }}"
     register: root_dir
