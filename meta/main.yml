@@ -1,7 +1,7 @@
 galaxy_info:
-  role_name: php-fpmapp
+  role_name: php_fpmapp
   author: William Wu
-  description: Setup php-fpm app
+  description: Setup php fpm app
   company: PyLabs
   license: MIT
   min_ansible_version: 2.0

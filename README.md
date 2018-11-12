@@ -1,17 +1,17 @@
-phpfpmapp
-=========
+php_fpmapp
+==========
 
-Setup php-fpm app
+Setup php fpm app
 
 Role Variables
 --------------
 
 ```yaml
-phpfpmapp_project_name: PHP_FPM_APP_PROJECT_NAME
-phpfpmapp_domain_name: PHP_FPM_APP_DOMAIN_NAME
-phpfpmapp_basedir: PHP_FPM_APP_BASE_DIR
-phpfpmapp_scm: YOUR_SCM_TOOLS (git or hg)
-phpfpmapp_repo: REPO_PATH
+php_fpmapp_project_name: PHP_FPMAPP_PROJECT_NAME
+php_fpmapp_domain_name: PHP_FPMAPP_DOMAIN_NAME
+php_fpmapp_basedir: PHP_FPMAPP_BASE_DIR
+php_fpmapp_scm: YOUR_SCM_TOOLS (git or hg)
+php_fpmapp_repo: REPO_PATH
 ```
 
 Dependencies
@@ -25,13 +25,13 @@ Example Playbook
 ```yaml
 - hosts: servers
   roles:
-    - role: pylabs.phpfpmapp
+    - role: pylabs.php_fpmapp
   vars:
-    phpfpmapp_project_name: myproject
-    phpfpmapp_domain_name: www.example.com
-    phpfpmapp_basedir: /srv/www/myproject
-    phpfpmapp_scm: git
-    phpfpmapp_repo: https://github.com/pylabs/test_project
+    php_fpmapp_project_name: myproject
+    php_fpmapp_domain_name: www.example.com
+    php_fpmapp_basedir: /srv/www/myproject
+    php_fpmapp_scm: git
+    php_fpmapp_repo: https://github.com/pylabs/test_project
 ```
 
 License

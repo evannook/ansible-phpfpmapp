@@ -2,9 +2,9 @@ server {
     listen 80;
     listen [::]:80;
 
-    server_name {{ phpfpmapp_domain_name }};
+    server_name {{ php_fpmapp_domain_name }};
 
-    root {{ phpfpmapp_basedir }};
+    root {{ php_fpmapp_basedir }};
 
     index index.php index.html index.htm;
 
