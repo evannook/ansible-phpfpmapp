@@ -1,4 +1,5 @@
 galaxy_info:
+  role_name: php-fpmapp
   author: William Wu
   description: Setup php-fpm app
   company: PyLabs
