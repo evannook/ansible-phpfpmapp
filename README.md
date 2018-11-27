@@ -1,23 +1,25 @@
-php_fpmapp
-==========
+php_fpmapps
+===========
 
-Setup php fpm app
+Setup multi php fpm apps
 
 Role Variables
 --------------
 
 ```yaml
-php_fpmapp_project_name: PHP_FPMAPP_PROJECT_NAME
-php_fpmapp_domain_name: PHP_FPMAPP_DOMAIN_NAME
-php_fpmapp_basedir: PHP_FPMAPP_BASE_DIR
-php_fpmapp_scm: YOUR_SCM_TOOLS (git or hg)
-php_fpmapp_repo: REPO_PATH
+php_fpmapps_web_base_dir: YOUR_WEB_BASE_DIR (default: /srv/www)
+php_fpmapps_vars:
+  - domain_name: PHP_FPMAPP_DOMAIN_NAME
+    base_dir: PHP_FPMAPP_BASE_DIR
+    scm: PHP_FPMAPP_SCM_TOOLS (git or hg)
+    repo_url: PHP_FPMAPP_REPO_URL
 ```
 
 Dependencies
 ------------
 
 - pylabs.php
+- pylabs.add_ssh_known_hosts
 
 Example Playbook
 ----------------
@@ -25,13 +27,17 @@ Example Playbook
 ```yaml
 - hosts: servers
   roles:
-    - role: pylabs.php_fpmapp
+    - role: pylabs.php_fpmapps
   vars:
-    php_fpmapp_project_name: myproject
-    php_fpmapp_domain_name: www.example.com
-    php_fpmapp_basedir: /srv/www/myproject
-    php_fpmapp_scm: git
-    php_fpmapp_repo: https://github.com/pylabs/test_project
+    php_fpmapps_vars:
+      - domain_name: www.example.com
+        base_dir: /srv/www/example_com
+        scm: git
+        repo_url: https://github.com/pylabs/example_com
+      - domain_name: www.example.org
+        base_dir: /srv/www/example_org
+        scm: hg
+        repo_url: https://github.com/pylabs/example_org
 ```
 
 License

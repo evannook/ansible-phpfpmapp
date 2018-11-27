@@ -6,33 +6,32 @@
       packages:
         - mercurial
         - git
-  - name: get root of base dir
-    shell: "dirname {{ php_fpmapp_basedir }}"
-    register: root_dir
-  - name: create root of base dir
-    file: "path={{ root_dir.stdout }} state=directory mode=0755"
   
-  - name: check if the project directory exists
-    stat: "path={{ php_fpmapp_basedir }}"
-    register: p
-  - name: delete dest dir if exists
-    command: "rm -rf {{ php_fpmapp_basedir }}"
-    when: "p.stat.isdir is defined and p.stat.isdir"
+  - name: create web root dir                                                                                                                                                                 
+    file:                                                                                                                                                                                     
+      path: "{{ php_fpmapps_web_base_dir }}"                                                                                                                                              
+      state: "directory"                                                                                                                                                                      
+      mode: "0711"                                                                                                                                                                            
+      owner: "root"                                                                                                                                                                           
+      group: "root"
   
-  - name: add github and bitbucket to ssh known hosts
-    script: "add_ssh_known_hosts.sh"
-  - name: checkout source code via scm
-    command: "{{ php_fpmapp_scm }} clone {{ php_fpmapp_repo }} {{ php_fpmapp_basedir }}"
-  
+  - name: checkout source code via scm                                                                                                                                                        
+    command: "{{ item.scm }} clone {{ item.repo_url }} {{ item.base_dir }}"                                                                                                                   
+    args:                                                                                                                                                                                     
+      creates: "{{ item.base_dir }}"                                                                                                                                                          
+    loop: "{{ php_fpmapps_vars }}"
+
   - name: install nginx configuration of the project
     template:
       src: "nginx.conf.j2"
-      dest: "/etc/nginx/sites-available/{{ php_fpmapp_domain_name }}.conf"
+      dest: "/etc/nginx/sites-available/{{ item.domain_name }}.conf"
+    loop: "{{ php_fpmapps_vars }}"
   
   - name: activate nginx configuration of the project
     file:
-      src: "/etc/nginx/sites-available/{{ php_fpmapp_domain_name }}.conf"
-      dest: "/etc/nginx/sites-enabled/{{ php_fpmapp_domain_name }}.conf"
+      src: "/etc/nginx/sites-available/{{ item.domain_name }}.conf"
+      dest: "/etc/nginx/sites-enabled/{{ item.domain_name }}.conf"
       state: "link"
+    loop: "{{ php_fpmapps_vars }}"
   tags:
-    - php_fpmapp
+    - php_fpmapps

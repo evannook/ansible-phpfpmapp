@@ -1,7 +1,7 @@
 galaxy_info:
-  role_name: php_fpmapp
+  role_name: php_fpmapps
   author: William Wu
-  description: Setup php fpm app
+  description: Setup multi php fpm apps
   company: PyLabs
   license: MIT
   min_ansible_version: 2.0
@@ -14,3 +14,4 @@ galaxy_info:
     - debian
 dependencies:
   - pylabs.php
+  - pylabs.add_ssh_known_hosts

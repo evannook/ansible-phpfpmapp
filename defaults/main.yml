@@ -1,2 +1,2 @@
 ---
-# defaults file for php_fpmapp
+php_fpmapps_web_base_dir: "/srv/www"
